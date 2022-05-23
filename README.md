@@ -3,9 +3,13 @@ Just a test
 
 ## Running the app:
 ### Configuration files
-Add following files to the 
-`.env/.development`
-`.env/.production`
+Add `.development` and `.production` files to the `.env` folder.
+Use following environment variables to configure the app: 
+```text
+API_URL=https://api2.shop.com/AffiliatePublisherNetwork/v2
+API_KEY=<Your api key here>
+```
+
 
 TODO: mention all needed config keys
 
