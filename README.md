@@ -10,8 +10,7 @@ API_URL=https://api2.shop.com/AffiliatePublisherNetwork/v2
 API_KEY=<Your api key here>
 ```
 
-
-TODO: mention all needed config keys
+ 
 
 SCREENS TODO:
 * Main screen - List categories, search field
@@ -27,3 +26,5 @@ FEATURES TODO:
 * Pro-active caching (?)
 * TESTS (Unit, E2E)
 * Localization
+* Docs
+* Infinitive scroll

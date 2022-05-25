@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHooks';
-import { fetchProduct } from '../../modules/Products/fetchProduct';
 import {
   buildFetchProductURL,
+  fetchProduct,
   FetchProductParams,
 } from '../../modules/Products/fetchProduct';
 import { ProductScreenProps } from '../../types/navigationTypes';
-import he from 'he';
+import { ProductView } from '../../modules/Products/ProductView';
+import { ProductSkeleton } from '../../modules/Products/ProductSkeleton';
 
 const styles = StyleSheet.create({
   root: {
@@ -17,11 +18,8 @@ const styles = StyleSheet.create({
 
 export const ProductScreen = ({ route }: ProductScreenProps) => {
   const { id } = route.params;
-  // const navigation = useNavigation<NavigationProductScreenProps>();
+
   const dispatch = useAppDispatch();
-  // const handlePress = useCallback(() => {
-  //   navigation.navigate('Category', { id, name });
-  // }, [navigation, id, name]);
 
   /**
    * Some issues with an api. Products are listed with id: number, but we're fetching details with id: string;
@@ -46,10 +44,10 @@ export const ProductScreen = ({ route }: ProductScreenProps) => {
 
   return (
     <View style={styles.root}>
-      {product && (
-        <>
-          <Text>{he.decode(product.name)}</Text>
-        </>
+      {product ? (
+        <ProductView product={product}></ProductView>
+      ) : (
+        <ProductSkeleton />
       )}
     </View>
   );

@@ -1,7 +1,9 @@
 {
   "home": {},
   "category": {},
-  "product": {},
+  "product": {
+    "share": "Share with somebody"
+  },
   "about": {},
   "errprs": {
     "unknown": "Unknown error"
