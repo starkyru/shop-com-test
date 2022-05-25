@@ -2,5 +2,8 @@
   "home": {},
   "category": {},
   "product": {},
-  "about": {}
+  "about": {},
+  "errprs": {
+    "unknown": "Unknown error"
+  }
 }

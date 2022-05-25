@@ -8,24 +8,30 @@ import { CategoryScreen } from './screens/CategoryScreen';
 import { AboutScreen } from './screens/AboutScreen';
 import { ProductScreen } from './screens/ProductScreen';
 import { NativeBaseProvider } from 'native-base';
+import axios from 'axios';
+import config from 'react-native-ultimate-config';
+import { RootNavigationParamList } from './types/navigationTypes';
 
-const Stack = createNativeStackNavigator();
+const RootNavigation = createNativeStackNavigator<RootNavigationParamList>();
+
+// Usually this stuff should be somewhere in Sagas or other middleware.
+axios.defaults.headers.common['api_Key'] = config.API_KEY;
 
 const App = () => {
   return (
     <Provider store={store}>
       <NativeBaseProvider>
         <NavigationContainer>
-          <Stack.Navigator>
+          <RootNavigation.Navigator>
             {/*
               In a production app, it is worth moving navigation
               into a separate component.
            */}
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Category" component={CategoryScreen} />
-            <Stack.Screen name="Product" component={ProductScreen} />
-            <Stack.Screen name="About" component={AboutScreen} />
-          </Stack.Navigator>
+            <RootNavigation.Screen name="Home" component={HomeScreen} />
+            <RootNavigation.Screen name="Category" component={CategoryScreen} />
+            <RootNavigation.Screen name="Product" component={ProductScreen} />
+            <RootNavigation.Screen name="About" component={AboutScreen} />
+          </RootNavigation.Navigator>
         </NavigationContainer>
       </NativeBaseProvider>
     </Provider>

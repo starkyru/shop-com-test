@@ -1,11 +1,9 @@
-import categoriesReducer, {
-  CategoriesState,
-} from './modules/Categories/categoriesReducer';
+import categoriesReducer from './modules/Categories/categoriesSlice';
+import productsReducer from './modules/Products/productsSlice';
+import productReducer from './modules/Products/productSlice';
 
-export interface StoreState {
-  catalog: CategoriesState;
-}
-
-export const createRootReducer = (): any => ({
+export const createRootReducer = () => ({
   categories: categoriesReducer,
+  products: productsReducer,
+  product: productReducer,
 });
