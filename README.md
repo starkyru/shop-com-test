@@ -1,5 +1,5 @@
 # shop-com-test
-This is a test app for Market Amerika. 
+This is a test app for the Market America. 
 
 ## Building the app
 Run `yarn` to install dependencies and then run `npx pod-install ios` to install pods for ios.
@@ -18,12 +18,13 @@ You can also run it locally using `yarn run ios` or `yarn run android`.
 PS. Loading screen/animation is iOS only. 
 
 ## Strengths and limitations:
-Basically, this app could be extended to the fully featured production app. 
-The biggest issue is with `productsSlice.ts` caching requests without any mapping. It was made for simplicity,
+Basically, this app could be extended to the fully featured production app. It has localization, almost all networking stuff 
+needed, basic architecture, navigation, etc.
+* The biggest issue is with `productsSlice.ts` caching requests without any mapping. It was made for simplicity,
 but it prevents me from making infinity scroll. It can be solved easily, by removing `start` and `perPage` 
 from the hash and adding last loaded `start` map per request. 
-Also, there is no way to manage async stuff/actions yet. Usually I do this with Redux Sagas.  
-
+* There is no way to manage async stuff/actions yet. Usually I do this with Redux Sagas.  
+* Images should be chosen according a resolution.
 
 
 ## FEATURES TODO:

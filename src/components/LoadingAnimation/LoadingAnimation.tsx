@@ -83,8 +83,6 @@ export const LoadingAnimation = () => {
       setDisplay(false);
     }),
   );
-  // tslint:disable
-  console.log(size.value);
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
