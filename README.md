@@ -15,8 +15,14 @@ API_KEY=<Your api key here>
 ### Building an app
 See [iOS](https://reactnative.dev/docs/publishing-to-app-store) and [Android](https://reactnative.dev/docs/signed-apk-android) guides.
 You can also run it locally using `yarn run ios` or `yarn run android`.
+PS. Loading screen/animation is iOS only. 
 
 ## Strengths and limitations:
+Basically, this app could be extended to the fully featured production app. 
+The biggest issue is with `productsSlice.ts` caching requests without any mapping. It was made for simplicity,
+but it prevents me from making infinity scroll. It can be solved easily, by removing `start` and `perPage` 
+from the hash and adding last loaded `start` map per request. 
+Also, there is no way to manage async stuff/actions yet. Usually I do this with Redux Sagas.  
 
 
 
