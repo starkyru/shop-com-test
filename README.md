@@ -25,6 +25,7 @@ but it prevents me from making infinity scroll. It can be solved easily, by remo
 from the hash and adding last loaded `start` map per request. 
 * There is no way to manage async stuff/actions (except async thunks) yet. Usually I do this with Redux Sagas.  
 * Images should be chosen according a resolution, but I'm just taking first from the `sizes` array.
+* Doesn't show subcategories.
 
 
 ## FEATURES TODO:

@@ -1,9 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import {
-  CategoryScreenProps,
-  NavigationCategoryScreenProps,
-} from '../../types/navigationTypes';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { CategoryScreenProps } from '../../types/navigationTypes';
 import {
   buildFetchProductsURL,
   fetchProducts,
@@ -13,6 +10,10 @@ import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHooks';
 import { ProductListItemView } from '../../modules/Products/ProductListItemView';
 import { unescapeName } from '../../utils/string';
 import { ScreenWrapper } from '../../components/ScreenWrapper';
+import { ShopProduct } from '../../types';
+import { Spinner } from 'native-base';
+import { PRODUCTS_PER_PAGE } from '../../utils/const';
+import { isRequestLoading } from '../../utils/requestStatus';
 
 const styles = StyleSheet.create({
   root: {
@@ -32,6 +33,8 @@ const styles = StyleSheet.create({
   },
 });
 
+const keyExtractor = (item: ShopProduct) => item.id.toString();
+
 export const CategoryScreen = ({ route }: CategoryScreenProps) => {
   const { id, name } = route.params;
   // const navigation = useNavigation<NavigationProductScreenProps>();
@@ -40,7 +43,7 @@ export const CategoryScreen = ({ route }: CategoryScreenProps) => {
   //   navigation.navigate('Category', { id, name });
   // }, [navigation, id, name]);
 
-  const fetchParams = useMemo(() => {
+  const initialFetchParams = useMemo(() => {
     return {
       publisherId: 'TEST',
       locale: 'en_US',
@@ -48,32 +51,59 @@ export const CategoryScreen = ({ route }: CategoryScreenProps) => {
       shipCountry: 'US',
       onlyMaProducts: true,
       categoryId: id,
+      perPage: PRODUCTS_PER_PAGE,
     } as FetchProductsParams;
   }, [id]);
+
   const hash = useMemo(
-    () => buildFetchProductsURL(fetchParams, false),
-    [fetchParams],
+    () => buildFetchProductsURL(initialFetchParams, false),
+    [initialFetchParams],
   );
   const products = useAppSelector(state => state.products.products[hash]);
+  const status = useAppSelector(state => state.products.statuses[hash]);
+  const currentCategory = useAppSelector(state =>
+    state.categories.list.find(category => category.id === id),
+  );
 
   useEffect(() => {
-    dispatch(fetchProducts(fetchParams));
-  }, [dispatch, fetchParams]);
+    dispatch(fetchProducts(initialFetchParams));
+  }, [dispatch, initialFetchParams]);
+
+  const renderItem = ({ item }: { item: ShopProduct }) => {
+    return <ProductListItemView id={item.id} name={item.name} />;
+  };
+
+  const handleEndReached = () => {
+    if (
+      currentCategory &&
+      status &&
+      products &&
+      !isRequestLoading(status) &&
+      products.length < currentCategory.productCount
+    ) {
+      dispatch(
+        fetchProducts({
+          ...initialFetchParams,
+          start: products.length ?? 0,
+        }),
+      );
+    }
+  };
 
   return (
     <ScreenWrapper>
       <View style={styles.root}>
         <Text style={styles.title}>{unescapeName(name)}</Text>
-        <ScrollView contentInsetAdjustmentBehavior="automatic">
-          {products &&
-            products.map(product => (
-              <ProductListItemView
-                key={product.id}
-                id={product.id}
-                name={product.name}
-              />
-            ))}
-        </ScrollView>
+        {products ? (
+          <FlatList
+            data={products}
+            renderItem={renderItem}
+            keyExtractor={keyExtractor}
+            onEndReached={handleEndReached}
+          />
+        ) : (
+          <Spinner /> /* should be skeleton here */
+        )}
       </View>
     </ScreenWrapper>
   );

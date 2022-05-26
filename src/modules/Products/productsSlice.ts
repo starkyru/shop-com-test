@@ -41,7 +41,9 @@ export const productsSlice = createSlice({
         if (!state.products[hash]) {
           state.products[hash] = action.payload.products;
         } else {
-          state.products[hash].concat(action.payload.products);
+          state.products[hash] = state.products[hash].concat(
+            action.payload.products,
+          );
         }
         state.lastItem[hash] =
           (action.meta.arg.start ?? 0) + action.payload.products.length;
