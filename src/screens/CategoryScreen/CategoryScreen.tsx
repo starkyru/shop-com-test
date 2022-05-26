@@ -50,7 +50,10 @@ export const CategoryScreen = ({ route }: CategoryScreenProps) => {
       categoryId: id,
     } as FetchProductsParams;
   }, [id]);
-  const hash = useMemo(() => buildFetchProductsURL(fetchParams), [fetchParams]);
+  const hash = useMemo(
+    () => buildFetchProductsURL(fetchParams, false),
+    [fetchParams],
+  );
   const products = useAppSelector(state => state.products.products[hash]);
 
   useEffect(() => {
@@ -63,8 +66,7 @@ export const CategoryScreen = ({ route }: CategoryScreenProps) => {
         <Text style={styles.title}>{unescapeName(name)}</Text>
         <ScrollView contentInsetAdjustmentBehavior="automatic">
           {products &&
-            products.products &&
-            products.products.map(product => (
+            products.map(product => (
               <ProductListItemView
                 key={product.id}
                 id={product.id}

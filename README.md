@@ -23,8 +23,8 @@ needed, basic architecture, navigation, etc.
 * The biggest issue is with `productsSlice.ts` caching requests without any mapping. It was made for simplicity,
 but it prevents me from making infinity scroll. It can be solved easily, by removing `start` and `perPage` 
 from the hash and adding last loaded `start` map per request. 
-* There is no way to manage async stuff/actions yet. Usually I do this with Redux Sagas.  
-* Images should be chosen according a resolution.
+* There is no way to manage async stuff/actions (except async thunks) yet. Usually I do this with Redux Sagas.  
+* Images should be chosen according a resolution, but I'm just taking first from the `sizes` array.
 
 
 ## FEATURES TODO:

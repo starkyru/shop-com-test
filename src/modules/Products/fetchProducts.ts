@@ -42,7 +42,10 @@ export type FetchProductsParams = {
   priceRangeId?: string;
 };
 
-export const buildFetchProductsURL = (params: FetchProductsParams) => {
+export const buildFetchProductsURL = (
+  params: FetchProductsParams,
+  addPaging: boolean = true,
+) => {
   const {
     publisherId,
     locale,
@@ -68,9 +71,11 @@ export const buildFetchProductsURL = (params: FetchProductsParams) => {
       onlyMaProducts.toString(),
     );
   term && UrlWithParams.searchParams.append('term', term);
-  typeof start === 'number' &&
+  addPaging &&
+    typeof start === 'number' &&
     UrlWithParams.searchParams.append('start', start.toString());
-  typeof perPage === 'number' &&
+  addPaging &&
+    typeof perPage === 'number' &&
     UrlWithParams.searchParams.append('perPage', perPage.toString());
   categoryId && UrlWithParams.searchParams.append('categoryId', categoryId);
   priceRangeId &&
