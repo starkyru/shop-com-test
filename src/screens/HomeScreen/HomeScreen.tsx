@@ -31,24 +31,27 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({}) => {
   }, [dispatch]);
 
   return (
-    <ScreenWrapper>
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <View style={styles.root}>
-          {categories && Array.isArray(categories) ? (
-            categories.map(category => {
-              return (
-                <CategoryItemListView
-                  key={category.id}
-                  name={category.name}
-                  id={category.id}
-                />
-              );
-            })
-          ) : (
-            <Text>Loading</Text>
-          )}
-        </View>
-      </ScrollView>
-    </ScreenWrapper>
+    <>
+      <ScreenWrapper>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
+          <View style={styles.root}>
+            {categories && Array.isArray(categories) ? (
+              categories.map(category => {
+                return (
+                  <CategoryItemListView
+                    key={category.id}
+                    name={category.name}
+                    productCount={category.productCount}
+                    id={category.id}
+                  />
+                );
+              })
+            ) : (
+              <Text>Loading</Text>
+            )}
+          </View>
+        </ScrollView>
+      </ScreenWrapper>
+    </>
   );
 };

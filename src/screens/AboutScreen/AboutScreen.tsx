@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { ScreenWrapper } from '../../components/ScreenWrapper';
 
 const styles = StyleSheet.create({
   root: {
@@ -10,5 +11,9 @@ const styles = StyleSheet.create({
 interface AboutScreenProps {}
 
 export const AboutScreen: React.FC<AboutScreenProps> = ({}) => {
-  return <View style={styles.root}></View>;
+  return (
+    <ScreenWrapper>
+      <View style={styles.root}></View>
+    </ScreenWrapper>
+  );
 };

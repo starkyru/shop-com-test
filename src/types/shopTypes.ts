@@ -92,6 +92,10 @@ export interface ShopProductOption {
   priceString: string;
   sku: string;
 }
+
+/**
+ * API's output type from `products/${productId}`
+ */
 export interface ShopProductFull {
   brand: string;
   catalogName: string;

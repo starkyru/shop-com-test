@@ -9,10 +9,12 @@ import {
 import { ProductScreenProps } from '../../types/navigationTypes';
 import { ProductView } from '../../modules/Products/ProductView';
 import { ProductSkeleton } from '../../modules/Products/ProductSkeleton';
+import { ScreenWrapper } from '../../components/ScreenWrapper';
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+    backgroundColor: '#ffffff',
   },
 });
 
@@ -43,12 +45,10 @@ export const ProductScreen = ({ route }: ProductScreenProps) => {
   }, [dispatch, fetchParams]);
 
   return (
-    <View style={styles.root}>
-      {product ? (
-        <ProductView product={product}></ProductView>
-      ) : (
-        <ProductSkeleton />
-      )}
-    </View>
+    <ScreenWrapper>
+      <View style={styles.root}>
+        {product ? <ProductView product={product} /> : <ProductSkeleton />}
+      </View>
+    </ScreenWrapper>
   );
 };

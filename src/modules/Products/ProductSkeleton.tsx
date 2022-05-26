@@ -20,6 +20,8 @@ export const ProductSkeleton = () => {
       >
         <Skeleton h="40" />
         <Skeleton.Text px="4" />
+        <Skeleton h="200" />
+        <Skeleton h="50" />
         <Skeleton px="4" my="4" rounded="md" startColor="primary.100" />
       </VStack>
     </Center>
