@@ -12,7 +12,7 @@
     "android:apk": "yarn rnuc .env/.production; cd android && ./gradlew assembleRelease",
     "android:debug-apk": "yarn rnuc .env/.development; cd android && ./gradlew assembleRelease",
     "android:install": "adb install android/app/build/outputs/apk/app-release.apk",
-    "test": "ts-jest",
+    "test": "jest",
     "test:clearCache": "jest --clearCache",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watchAll",
