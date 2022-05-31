@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
-import Logo from '../../assets/shop-logo-us.svg';
+import Logo from '../../assets/shop-logo-us';
 
 import Animated, {
+  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withDelay,
@@ -80,7 +81,7 @@ export const LoadingAnimation = () => {
     withTiming(1, { duration: 300 }),
     withTiming(200, { duration: 300 }),
     withTiming(0.5, { duration: 500 }, () => {
-      setDisplay(false);
+      runOnJS(setDisplay)(false);
     }),
   );
 
