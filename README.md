@@ -19,17 +19,19 @@ PS. Loading screen/animation is iOS only.
 
 ## Strengths and limitations:
 Basically, this app could be extended to the fully featured production app. It has localization, almost all networking stuff 
-needed, basic architecture, navigation, etc.
-* The biggest issue is with `productsSlice.ts` caching requests without any mapping. It was made for simplicity,
+needed, basic architecture, navigation, etc. It just a bit limited in the level of abstraction. 
+
+* ~~The biggest issue is with `productsSlice.ts` caching requests without any mapping. It was made for simplicity,
 but it prevents me from making infinity scroll. It can be solved easily, by removing `start` and `perPage` 
-from the hash and adding last loaded `start` map per request. 
+from the hash and adding last loaded `start` map per request.~~ Already fixed it.
 * There is no way to manage async stuff/actions (except async thunks) yet. Usually I do this with Redux Sagas.  
 * Images should be chosen according a resolution, but I'm just taking first from the `sizes` array.
 * Doesn't show subcategories.
+* Need additional loading states.
 
 
 ## FEATURES TODO:
 
 * Pro-active caching (?)
 * TESTS (Unit, E2E)
-* Infinitive scroll
+

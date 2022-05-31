@@ -70,7 +70,13 @@ export const CategoryScreen = ({ route }: CategoryScreenProps) => {
   }, [dispatch, initialFetchParams]);
 
   const renderItem = ({ item }: { item: ShopProduct }) => {
-    return <ProductListItemView id={item.id} name={item.name} />;
+    return (
+      <ProductListItemView
+        id={item.id}
+        name={item.name}
+        imageUri={item.image?.sizes[0]?.url}
+      />
+    );
   };
 
   const handleEndReached = () => {
