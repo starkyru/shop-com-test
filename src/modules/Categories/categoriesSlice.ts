@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { ShopCategory, ShopCountry } from '../../types';
 import {
   extractActionErrorText,
@@ -8,8 +8,7 @@ import {
   RequestStatus,
   requestSuccessful,
 } from '../../utils/requestStatus';
-import axios from 'axios';
-import config from 'react-native-ultimate-config';
+import { fetchCategories } from './fetchCategories';
 
 export interface CategoriesState {
   list: ShopCategory[];
@@ -31,30 +30,6 @@ export type FetchCategoriesParams = {
    */
   onlyMaProducts?: boolean;
 };
-
-const buildFetchCategoriesURL = (params: FetchCategoriesParams) => {
-  const { publisherId, locale, site, shipCountry, onlyMaProducts } = params;
-  const UrlWithParams = new URL(`${config.API_URL}/categories`);
-  UrlWithParams.searchParams.append('publisherId', publisherId);
-  UrlWithParams.searchParams.append('locale', locale);
-  site && UrlWithParams.searchParams.append('site', site);
-  shipCountry && UrlWithParams.searchParams.append('shipCountry', shipCountry);
-  onlyMaProducts !== undefined &&
-    UrlWithParams.searchParams.append(
-      'onlyMaProducts',
-      onlyMaProducts.toString(),
-    );
-  return UrlWithParams.href;
-};
-export const fetchCategories = createAsyncThunk(
-  'categories/fetchCategories',
-  async (params: FetchCategoriesParams) => {
-    const url = buildFetchCategoriesURL(params);
-
-    const response = await axios.get(url);
-    return response.data;
-  },
-);
 
 export const categoriesSlice = createSlice({
   name: 'categories',

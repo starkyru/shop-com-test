@@ -60,29 +60,29 @@ export const buildFetchProductsURL = (
     sellerId,
     brandId,
   } = params;
-  const UrlWithParams = new URL(`${config.API_URL}/products`);
-  UrlWithParams.searchParams.append('publisherId', publisherId);
-  UrlWithParams.searchParams.append('locale', locale);
-  site && UrlWithParams.searchParams.append('site', site);
-  shipCountry && UrlWithParams.searchParams.append('shipCountry', shipCountry);
+  const urlWithParams = new URL(`${config.API_URL}/products`);
+  urlWithParams.searchParams.append('publisherId', publisherId);
+  urlWithParams.searchParams.append('locale', locale);
+  site && urlWithParams.searchParams.append('site', site);
+  shipCountry && urlWithParams.searchParams.append('shipCountry', shipCountry);
   onlyMaProducts !== undefined &&
-    UrlWithParams.searchParams.append(
+    urlWithParams.searchParams.append(
       'onlyMaProducts',
       onlyMaProducts.toString(),
     );
-  term && UrlWithParams.searchParams.append('term', term);
+  term && urlWithParams.searchParams.append('term', term);
   addPaging &&
     typeof start === 'number' &&
-    UrlWithParams.searchParams.append('start', start.toString());
+    urlWithParams.searchParams.append('start', start.toString());
   addPaging &&
     typeof perPage === 'number' &&
-    UrlWithParams.searchParams.append('perPage', perPage.toString());
-  categoryId && UrlWithParams.searchParams.append('categoryId', categoryId);
+    urlWithParams.searchParams.append('perPage', perPage.toString());
+  categoryId && urlWithParams.searchParams.append('categoryId', categoryId);
   priceRangeId &&
-    UrlWithParams.searchParams.append('priceRangeId', priceRangeId);
-  sellerId && UrlWithParams.searchParams.append('sellerId', sellerId);
-  brandId && UrlWithParams.searchParams.append('brandId', brandId);
-  return UrlWithParams.href;
+    urlWithParams.searchParams.append('priceRangeId', priceRangeId);
+  sellerId && urlWithParams.searchParams.append('sellerId', sellerId);
+  brandId && urlWithParams.searchParams.append('brandId', brandId);
+  return urlWithParams.href;
 };
 
 export const fetchProducts = createAsyncThunk(

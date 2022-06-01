@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationProductScreenProps } from '../../types/navigationTypes';
 import { unescapeName } from '../../utils/string';
-import { Box, Flex, Image } from 'native-base';
+import { Box, Image } from 'native-base';
 
 const styles = StyleSheet.create({
   root: {

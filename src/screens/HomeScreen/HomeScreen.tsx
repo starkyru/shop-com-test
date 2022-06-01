@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { ScreenWrapper } from '../../components/ScreenWrapper';
-import { fetchCategories } from '../../modules/Categories/categoriesSlice';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/reduxHooks';
 import { selectAllCategories } from '../../modules/Categories/categoriesSelectors';
 import { CategoryItemListView } from '../../modules/Categories/CategoryItemListView';
+import { fetchCategories } from '../../modules/Categories/fetchCategories';
 
 const styles = StyleSheet.create({
   root: {
