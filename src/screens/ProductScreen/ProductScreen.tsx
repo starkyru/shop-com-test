@@ -41,7 +41,7 @@ export const ProductScreen = ({ route }: ProductScreenProps) => {
   const product = useAppSelector(state => state.product.products[hash]);
 
   useEffect(() => {
-    dispatch(fetchProduct(fetchParams));
+    dispatch(fetchProduct({ fetchParams }));
   }, [dispatch, fetchParams]);
 
   return (

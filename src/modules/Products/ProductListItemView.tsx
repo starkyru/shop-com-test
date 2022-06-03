@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NavigationProductScreenProps } from '../../types/navigationTypes';
 import { unescapeName } from '../../utils/string';
 import { Box, Image } from 'native-base';
+import { ShopProduct } from '../../types';
 
 const styles = StyleSheet.create({
   root: {
@@ -28,15 +29,12 @@ const styles = StyleSheet.create({
   },
 });
 
-interface ProductListItemViewProps {
-  name: string;
-  id: number;
-  imageUri?: string;
-}
+type ProductListItemViewProps = Pick<ShopProduct, 'name' | 'id' | 'image'>;
+
 export const ProductListItemView: React.FC<ProductListItemViewProps> = ({
   name,
   id,
-  imageUri,
+  image,
 }) => {
   const navigation = useNavigation<NavigationProductScreenProps>();
   const handlePress = useCallback(() => {
@@ -51,9 +49,9 @@ export const ProductListItemView: React.FC<ProductListItemViewProps> = ({
       underlayColor="#DDDDDD"
     >
       <Box style={styles.inner}>
-        {imageUri && (
+        {image?.sizes[0]?.url && (
           <Image
-            source={{ uri: imageUri }}
+            source={{ uri: image?.sizes[0]?.url }}
             alt={cleanName}
             resizeMode="contain"
             style={styles.image}

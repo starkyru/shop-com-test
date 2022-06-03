@@ -66,16 +66,12 @@ export const CategoryScreen = ({ route }: CategoryScreenProps) => {
   );
 
   useEffect(() => {
-    dispatch(fetchProducts(initialFetchParams));
+    dispatch(fetchProducts({ fetchParams: initialFetchParams }));
   }, [dispatch, initialFetchParams]);
 
   const renderItem = ({ item }: { item: ShopProduct }) => {
     return (
-      <ProductListItemView
-        id={item.id}
-        name={item.name}
-        imageUri={item.image?.sizes[0]?.url}
-      />
+      <ProductListItemView id={item.id} name={item.name} image={item.image} />
     );
   };
 
@@ -89,8 +85,10 @@ export const CategoryScreen = ({ route }: CategoryScreenProps) => {
     ) {
       dispatch(
         fetchProducts({
-          ...initialFetchParams,
-          start: products.length ?? 0,
+          fetchParams: {
+            ...initialFetchParams,
+            start: products.length ?? 0,
+          },
         }),
       );
     }

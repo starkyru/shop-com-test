@@ -3,7 +3,7 @@ import { rest } from 'msw';
 
 export const handlers = [
   rest.get(
-    'https://4ec38857-2800-4f07-838e-535a78cf7d51.mock.pstmn.io/flavors',
+    'http://test/categories?publisherId=publisherId&locale=locale',
     (req, res, ctx) => {
       return res(
         ctx.json([

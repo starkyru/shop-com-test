@@ -13,26 +13,6 @@ global.Promise = Promise;
 jest.mock('react-native-reanimated', () => {
   // const View = require('react-native').View;
   require('react-native-reanimated/mock');
-  // const mockReanimated = jest.createMockFromModule(
-  //   'react-native-reanimated',
-  // ).default;
-  // return mockReanimated;
-  // return {
-  //   Value: jest.fn(),
-  //   event: jest.fn(),
-  //   add: jest.fn(),
-  //   eq: jest.fn(),
-  //   set: jest.fn(),
-  //   cond: jest.fn(),
-  //   interpolate: jest.fn(),
-  //   View: View,
-  //   Extrapolate: { CLAMP: jest.fn() },
-  //   Transition: {
-  //     Together: 'Together',
-  //     Out: 'Out',
-  //     In: 'In',
-  //   },
-  // };
 });
 
 jest.mock('react-native-ultimate-config', () => {
@@ -42,39 +22,6 @@ jest.mock('react-native-webview', () => {
   const View = require('react-native/Libraries/Components/View/View');
   return View;
 });
-// jest.mock('react-native-gesture-handler', () => {
-//   const View = require('react-native/Libraries/Components/View/View');
-//   return {
-//     Swipeable: View,
-//     DrawerLayout: View,
-//     State: {},
-//     ScrollView: View,
-//     Slider: View,
-//     Switch: View,
-//     TextInput: View,
-//     ToolbarAndroid: View,
-//     ViewPagerAndroid: View,
-//     DrawerLayoutAndroid: View,
-//     WebView: View,
-//     NativeViewGestureHandler: View,
-//     TapGestureHandler: View,
-//     FlingGestureHandler: View,
-//     ForceTouchGestureHandler: View,
-//     LongPressGestureHandler: View,
-//     PanGestureHandler: View,
-//     PinchGestureHandler: View,
-//     RotationGestureHandler: View,
-//     /* Buttons */
-//     RawButton: View,
-//     BaseButton: View,
-//     RectButton: View,
-//     BorderlessButton: View,
-//     /* Other */
-//     FlatList: View,
-//     gestureHandlerRootHOC: () => null,
-//     Directions: {},
-//   };
-// });
 
 // surpressing warning resulted by useLinking due to usage of NavigationContainer
 jest.mock('@react-navigation/native/lib/commonjs/useLinking.native', () => ({

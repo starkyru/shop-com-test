@@ -14,8 +14,8 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 const { width, height } = Dimensions.get('window');
 
-const initialSize = 18;
-const initialTop = height / 2 - initialSize - 4.5;
+const INITIAL_SIZE = 18;
+const INITIAL_TOP = height / 2 - INITIAL_SIZE - 4.5;
 
 const styles = StyleSheet.create({
   root: {
@@ -32,10 +32,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 8001,
     backgroundColor: '#00a8ca',
-    left: width / 2 - initialSize / 2 + 2.5,
-    top: initialTop,
-    width: initialSize,
-    height: initialSize,
+    left: width / 2 - INITIAL_SIZE / 2 + 2.5,
+    top: INITIAL_TOP,
+    width: INITIAL_SIZE,
+    height: INITIAL_SIZE,
     borderRadius: 999999,
   },
   image: {
@@ -60,7 +60,7 @@ export const LoadingAnimation = () => {
   const [display, setDisplay] = useState(true);
   const size = useSharedValue(1);
   const imageOpacity = useSharedValue(100);
-  const top = useSharedValue(initialTop);
+  const top = useSharedValue(INITIAL_TOP);
   const bg = useSharedValue('white');
 
   top.value = withDelay(

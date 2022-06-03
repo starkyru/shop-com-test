@@ -28,11 +28,11 @@ export const productsSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchProducts.pending, (state, action) => {
-        const hash = buildFetchProductsURL(action.meta.arg, false);
+        const hash = buildFetchProductsURL(action.meta.arg.fetchParams, false);
         state.statuses[hash] = requestLoading();
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        const hash = buildFetchProductsURL(action.meta.arg, false);
+        const hash = buildFetchProductsURL(action.meta.arg.fetchParams, false);
         state.statuses[hash] = requestSuccessful();
         /**
          * Here we can run into multiple issues, like run condition.
@@ -46,10 +46,11 @@ export const productsSlice = createSlice({
           );
         }
         state.lastItem[hash] =
-          (action.meta.arg.start ?? 0) + action.payload.products.length;
+          (action.meta.arg.fetchParams.start ?? 0) +
+          action.payload.products.length;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
-        const hash = buildFetchProductsURL(action.meta.arg, false);
+        const hash = buildFetchProductsURL(action.meta.arg.fetchParams, false);
         state.statuses[hash] = requestFailed(extractActionErrorText(action));
       });
   },

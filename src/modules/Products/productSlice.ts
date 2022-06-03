@@ -26,18 +26,18 @@ export const productSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchProduct.pending, (state, action) => {
-        const hash = buildFetchProductURL(action.meta.arg);
+        const hash = buildFetchProductURL(action.meta.arg.fetchParams);
 
         state.statuses[hash] = requestLoading();
       })
       .addCase(fetchProduct.fulfilled, (state, action) => {
-        const hash = buildFetchProductURL(action.meta.arg);
+        const hash = buildFetchProductURL(action.meta.arg.fetchParams);
         state.statuses[hash] = requestSuccessful();
 
         state.products[hash] = action.payload;
       })
       .addCase(fetchProduct.rejected, (state, action) => {
-        const hash = buildFetchProductURL(action.meta.arg);
+        const hash = buildFetchProductURL(action.meta.arg.fetchParams);
 
         state.statuses[hash] = requestFailed(extractActionErrorText(action));
       });

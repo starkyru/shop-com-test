@@ -21,11 +21,13 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({}) => {
   useEffect(() => {
     dispatch(
       fetchCategories({
-        publisherId: 'TEST',
-        locale: 'en_US',
-        site: 'shop',
-        shipCountry: 'US',
-        onlyMaProducts: true,
+        fetchParams: {
+          publisherId: 'TEST',
+          locale: 'en_US',
+          site: 'shop',
+          shipCountry: 'US',
+          onlyMaProducts: true,
+        },
       }),
     );
   }, [dispatch]);

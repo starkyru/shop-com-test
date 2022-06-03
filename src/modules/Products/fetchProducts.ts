@@ -2,6 +2,7 @@ import axios from 'axios';
 import config from 'react-native-ultimate-config';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ShopCountry } from '../../types';
+import { FetchCategoriesParams } from '../Categories/categoriesSlice';
 
 export type FetchProductsParams = {
   publisherId: string;
@@ -42,11 +43,16 @@ export type FetchProductsParams = {
   priceRangeId?: string;
 };
 
+type FetchProductsActionParams = {
+  fetchParams: FetchProductsParams;
+  addPaging?: boolean;
+  baseUrl?: string;
+};
+
+const DEFAULT_ADD_PAGING = true;
+
 export const buildFetchProductsURL = (
-  params: FetchProductsParams,
-  addPaging: boolean = true,
-) => {
-  const {
+  {
     publisherId,
     locale,
     site,
@@ -59,8 +65,11 @@ export const buildFetchProductsURL = (
     priceRangeId,
     sellerId,
     brandId,
-  } = params;
-  const urlWithParams = new URL(`${config.API_URL}/products`);
+  }: FetchProductsParams,
+  addPaging: boolean = DEFAULT_ADD_PAGING,
+  baseUrl = config.API_URL,
+) => {
+  const urlWithParams = new URL(`${baseUrl}/products`);
   urlWithParams.searchParams.append('publisherId', publisherId);
   urlWithParams.searchParams.append('locale', locale);
   site && urlWithParams.searchParams.append('site', site);
@@ -87,8 +96,12 @@ export const buildFetchProductsURL = (
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
-  async (params: FetchProductsParams) => {
-    const url = buildFetchProductsURL(params);
+  async (params: FetchProductsActionParams) => {
+    const url = buildFetchProductsURL(
+      params.fetchParams,
+      params.addPaging,
+      params.baseUrl,
+    );
 
     const response = await axios.get(url);
     return response.data;
